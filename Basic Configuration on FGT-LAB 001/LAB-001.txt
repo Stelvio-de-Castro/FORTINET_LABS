@@ -1,0 +1,200 @@
+AIM: 
+
+1.Initial Configuration
+
+2.Interfaces \& Route configuration 
+
+3\. Policy
+
+
+
+
+
+
+
+###### **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_INITIAL CONFIGURATION\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+
+
+
+**Port1<---->Mgmt**
+
+Default route/gateway must be enable:
+
+
+
+\#config router static 
+
+(static)#edit 1
+
+(1)#set gateway 192.168.1.1
+
+(1)#set device port1
+
+(1)#next
+
+(static)#exit
+
+(static)end
+
+
+
+
+
+***\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_DNS CONFIGURATION\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_***
+
+
+
+\#config system dns
+
+(dns)#set primary 192.168.1.1
+
+(dns)#set secondary 8.8.8.8
+
+(dns)#end
+
+
+
+***\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_SET HOST NAME\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_***
+
+\#config system global
+
+(global)#set hostname FWinitial
+
+(global)#end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###### **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_INTERFACES \& ROUTE CONFIGURATION\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+
+
+
+
+
+
+
+***\_\_\_\_\_\_\_\_\_\_\_\_\_\_CONFIGURE IP ADDRESSES ON PORT(2), PORT(3) ON FORTIGATE GUI\_\_\_\_\_\_\_\_\_\_\_***
+
+Go to Network> Interfaces
+
+
+
+
+
+***\_\_\_\_\_\_\_\_\_\_\_\_\_\_SET THE IPS ON THE ROUTERS AND DEFINE Dafault ROUTING PROTOCOL\_\_\_\_\_\_\_\_\_\_\_***
+
+
+
+**Router 1**
+
+
+
+conf t
+
+hostname R1
+
+int e0/0
+
+&nbsp;ip address 10.1.1.10 255.255.255.0
+
+&nbsp;no shutdown
+
+
+
+ip route 0.0.0.0 0.0.0.0 10.1.1.1
+
+end
+
+wr
+
+
+
+**Router 20**
+
+
+
+conf t
+
+hostname R20
+
+int e0/0
+
+&nbsp;ip address 172.16.10.20 255.255.255.0
+
+&nbsp;no shutdown
+
+ip route 0.0.0.0 0.0.0.0 172.16.10.1
+
+end
+
+wr
+
+
+
+**Router 10**
+
+
+
+conf t
+
+hostname R10
+
+int e0/0
+
+&nbsp;ip address 172.16.10.10 255.255.255.0
+
+&nbsp;no shutdown
+
+ip route  0.0.0.0 0.0.0.0 172.16.10.1
+
+end
+
+wr
+
+
+
+
+
+
+
+###### **\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_POLICY CREATION\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+
+
+
+
+
+R1 ping---------> INTERNET
+
+
+
+R1 ping---------> DMZ
+
+
+
+
+
+
+
+
+
