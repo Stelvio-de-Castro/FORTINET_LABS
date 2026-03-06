@@ -1,2 +1,3 @@
 DESCRIPTION:
-This repository stores the file'C7200' is the Cisco router image for GNS3.
+In this repository I shared some LABs and their respective images for those who may be willing to recreate the Labs. 
+The aim and configuration of each LAB can be find described in a txt. file.
